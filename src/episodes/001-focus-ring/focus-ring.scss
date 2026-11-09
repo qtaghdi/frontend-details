@@ -1,6 +1,4 @@
 .focus-ring {
-  --capture-width: 640px;
-  --capture-ratio: 16 / 9;
   --surface: #efebe3;
   --ink: #26253a;
   --key-surface: #fffcf6;
@@ -19,10 +17,7 @@
 
   display: grid;
   place-items: center;
-  inline-size: min(100%, var(--capture-width));
-  min-block-size: 240px;
-  aspect-ratio: var(--capture-ratio);
-  margin-inline: auto;
+  min-block-size: max(240px, 100dvh);
   color: var(--ink);
   background: var(--surface);
 

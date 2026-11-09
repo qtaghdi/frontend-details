@@ -32,18 +32,18 @@ pnpm build-storybook
 
 ## GIF 캡처
 
-Canvas의 **Viewport size**에서 **GIF · 640 × 360**을 선택하면 캡처 크기로 미리 볼 수 있습니다. 녹화할 때는 아래의 캡처 링크를 열고 색이 채워진 실험 화면만 녹화 영역으로 지정하세요. 브라우저 배율이 100%이고 콘텐츠 영역 너비가 640px 이상이면 실험 화면은 640 × 360 CSS 픽셀입니다.
+Canvas의 **Viewport size**에서 **GIF · 640 × 360**을 선택하면 실험 화면을 640 × 360 CSS 픽셀로 맞출 수 있습니다. 아래 격리 화면은 브라우저 콘텐츠 영역을 가득 채웁니다. 같은 크기로 녹화하려면 브라우저의 뷰포트를 640 × 360으로 맞추거나 녹화 도구에서 해당 크기의 영역을 선택하세요.
 
 1. 실험 화면의 빈 곳을 클릭하고 녹화를 시작합니다.
 2. Tab으로 01 → 02 → 03을 이동하고 Shift + Tab으로 되돌아갑니다. 비교 예제에서는 01을 클릭한 뒤 Tab을 눌러 테두리와 링을 비교할 수 있습니다.
 3. 녹화 도구에서 GIF로 저장합니다.
 
-| Story                  | 캡처 링크                                                                                          |
-| ---------------------- | -------------------------------------------------------------------------------------------------- |
-| Browser Default        | [열기](http://localhost:6006/iframe.html?id=001-focus-ring--browser-default&viewMode=story)        |
-| Outline Removed        | [열기](http://localhost:6006/iframe.html?id=001-focus-ring--outline-removed&viewMode=story)        |
-| Custom Focus Ring      | [열기](http://localhost:6006/iframe.html?id=001-focus-ring--custom-focus-ring&viewMode=story)      |
-| Focus vs Focus Visible | [열기](http://localhost:6006/iframe.html?id=001-focus-ring--focus-vs-focus-visible&viewMode=story) |
+| Story                  | 캡처 링크                                                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Browser Default        | [열기](https://qtaghdi.github.io/frontend-details/iframe.html?id=001-focus-ring--browser-default&viewMode=story)        |
+| Outline Removed        | [열기](https://qtaghdi.github.io/frontend-details/iframe.html?id=001-focus-ring--outline-removed&viewMode=story)        |
+| Custom Focus Ring      | [열기](https://qtaghdi.github.io/frontend-details/iframe.html?id=001-focus-ring--custom-focus-ring&viewMode=story)      |
+| Focus vs Focus Visible | [열기](https://qtaghdi.github.io/frontend-details/iframe.html?id=001-focus-ring--focus-vs-focus-visible&viewMode=story) |
 
 종이색과 잉크색을 기본으로 쓰고, 커스텀 링은 밝은 배경에서 보라색, 어두운 배경에서 연보라색으로 표시합니다. 색상, 버튼 규격, 간격, 링 두께는 `focus-ring.scss`의 CSS 변수로 조절합니다.
 
