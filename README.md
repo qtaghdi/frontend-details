@@ -2,6 +2,10 @@
 
 Velog 기술 블로그 시리즈를 위한 프론트엔드 실험실입니다. 브라우저 동작을 작은 Story로 구현하고, 실제 입력으로 비교한 결과를 글과 이미지 또는 GIF에 활용합니다.
 
+[배포된 Storybook 열기](https://qtaghdi.github.io/frontend-details/)
+
+`main`에 변경이 올라가면 GitHub Actions가 Storybook을 빌드해 GitHub Pages에 배포합니다.
+
 ## 사용 기술
 
 React, TypeScript, Vite, Storybook, SCSS, pnpm, ESLint, Prettier를 사용합니다. Storybook의 Accessibility 패널에서 자동 검사 결과를 확인할 수 있습니다.
