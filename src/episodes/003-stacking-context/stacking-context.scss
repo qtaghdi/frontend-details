@@ -1,0 +1,104 @@
+@use "../../shared/experiment";
+
+.stack-demo {
+  @include experiment.stage;
+
+  background: experiment.$paper;
+  font:
+    14px / 1.35 system-ui,
+    sans-serif;
+
+  &__comparison {
+    @include experiment.comparison;
+
+    > section {
+      min-inline-size: 0;
+    }
+  }
+
+  &__caption {
+    margin: 0 0 8px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  code {
+    font-family: experiment.$mono;
+  }
+
+  &__diagram {
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+    inline-size: min(100%, 450px);
+    block-size: 234px;
+    border: 1px solid experiment.$edge;
+    border-radius: 14px;
+    background: experiment.$surface;
+  }
+
+  &__context {
+    position: absolute;
+    inset: auto 10px 9px;
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  &__parent {
+    position: absolute;
+    inset: 14px auto auto 6%;
+    box-sizing: border-box;
+    inline-size: 64%;
+    block-size: 162px;
+    padding: 8px;
+    border: 1px dashed experiment.$accent;
+    border-radius: 10px;
+    background: #eee6ff;
+
+    > span {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+
+  &__child,
+  &__first,
+  &__sibling {
+    position: absolute;
+    box-sizing: border-box;
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding: 9px;
+    border-radius: 8px;
+  }
+
+  &__child,
+  &__first {
+    color: white;
+    background: experiment.$accent;
+  }
+
+  &__child {
+    inset: 44px 5% auto 8px;
+    block-size: 94px;
+  }
+
+  &__first {
+    inset: 48px auto auto 9%;
+    inline-size: 58%;
+    block-size: 102px;
+  }
+
+  &__sibling {
+    z-index: 2;
+    inset: 84px 6% auto auto;
+    inline-size: 50%;
+    block-size: 110px;
+    justify-items: end;
+    color: #153b37;
+    background: #aee5d9;
+    border: 1px solid #639e94;
+  }
+}
