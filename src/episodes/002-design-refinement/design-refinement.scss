@@ -1,0 +1,187 @@
+@use "../../shared/experiment";
+
+.design-demo {
+  @include experiment.stage;
+
+  background: experiment.$paper;
+  font:
+    15px / 1.45 system-ui,
+    sans-serif;
+
+  &__comparison {
+    @include experiment.comparison;
+
+    > section {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-inline-size: 0;
+    }
+  }
+
+  &__caption {
+    margin: 0 0 8px;
+    font: 700 12px / 1.4 experiment.$mono;
+  }
+
+  &__card {
+    box-sizing: border-box;
+    inline-size: min(100%, 380px);
+    padding: 16px 12px 11px;
+    border: 1px solid #a8a8a8;
+    background: #fafafa;
+    color: #333;
+
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h2 {
+      font: inherit;
+    }
+
+    .design-demo__brand {
+      margin-block-end: 4px;
+    }
+
+    form {
+      display: grid;
+      gap: 6px;
+      margin-block: 20px 5px;
+    }
+
+    label {
+      display: grid;
+      gap: 3px;
+    }
+
+    input,
+    button {
+      box-sizing: border-box;
+      min-inline-size: 0;
+      min-block-size: 40px;
+      padding: 6px 10px;
+      border: 1px solid #777;
+      border-radius: 3px;
+      color: inherit;
+      font: inherit;
+    }
+
+    input {
+      background: #fff;
+    }
+
+    button {
+      justify-self: start;
+      background: #e6e6e6;
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid experiment.$accent;
+      outline-offset: 3px;
+    }
+  }
+
+  &__card--typography {
+    h2 {
+      font-size: clamp(20px, 3.8vw, 28px);
+      font-weight: 750;
+      line-height: 1.2;
+      letter-spacing: -0.045em;
+    }
+
+    .design-demo__brand,
+    label,
+    button {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .design-demo__note {
+      font-size: 12px;
+    }
+  }
+
+  &__card--spacing {
+    --space: 8px;
+
+    padding: calc(var(--space) * 3);
+
+    .design-demo__intro {
+      display: grid;
+      gap: var(--space);
+    }
+
+    .design-demo__brand {
+      margin: 0;
+    }
+
+    form {
+      gap: calc(var(--space) * 2);
+      margin-block: calc(var(--space) * 2);
+    }
+
+    label {
+      gap: var(--space);
+    }
+  }
+
+  &__card--color {
+    border-color: experiment.$edge;
+    color: experiment.$ink;
+    background: experiment.$surface;
+
+    .design-demo__brand {
+      color: experiment.$accent;
+    }
+
+    .design-demo__intro > p:last-child,
+    .design-demo__note {
+      color: #5e586b;
+    }
+
+    button {
+      border-color: experiment.$accent;
+      color: white;
+      background: experiment.$accent;
+    }
+  }
+
+  &__card--hierarchy {
+    .design-demo__form {
+      padding-block-end: calc(var(--space) * 2);
+      border-block-end: 1px solid experiment.$edge;
+    }
+
+    button {
+      justify-self: stretch;
+    }
+  }
+
+  &__card--after {
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgb(38 37 58 / 8%);
+
+    input,
+    button {
+      border-radius: 8px;
+    }
+
+    button:hover {
+      background: #451bad;
+    }
+  }
+
+  @media (max-height: 400px) {
+    padding-block: 10px;
+
+    &__card--spacing {
+      padding-block: calc(var(--space) * 2);
+    }
+  }
+
+  &__comparison &__card {
+    inline-size: 100%;
+  }
+}
