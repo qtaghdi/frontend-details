@@ -58,9 +58,11 @@ Canvas의 **Viewport size**에서 **GIF · 640 × 360**을 선택하면 실험 �
 
 ## 에피소드 목록
 
-| 회차 | 주제      | Velog     |
-| ---- | --------- | --------- |
-| 001  | 포커스 링 | 게시 예정 |
+| 회차 | 주제                         | Velog     |
+| ---- | ---------------------------- | --------- |
+| 001  | 포커스 링                    | 게시 예정 |
+| 002  | 왜 내 웹만 구릴까?           | 게시 예정 |
+| 003  | z-index: 9999도 안 되는 이유 | 게시 예정 |
 
 게시 후 Velog 열의 ‘게시 예정’을 해당 글의 링크로 교체합니다.
 
@@ -70,6 +72,39 @@ Canvas의 **Viewport size**에서 **GIF · 640 × 360**을 선택하면 실험 �
 - **Outline Removed** — 같은 버튼에서 outline을 지웁니다. 키보드로 포커스가 이동해도 위치를 눈으로 확인할 수 없는 의도된 실패입니다. 자동 검사 결과와 함께 직접 키보드로 확인하세요. [W3C 실패 기법 F78](https://www.w3.org/WAI/WCAG22/Techniques/failures/F78)
 - **Custom Focus Ring** — 밝은 배경과 어두운 배경에서 `outline`과 `outline-offset`을 적용한 링을 관찰합니다. 키보드로 이동하며 표시가 분명하고 버튼 크기가 유지되는지 확인하세요. WCAG 적합성은 별도 평가가 필요합니다. [W3C Focus Visible 이해하기](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html)
 - **Focus vs Focus Visible** — 같은 버튼의 진한 테두리는 `:focus`를, 보라색 링은 `:focus-visible`을 나타냅니다. 후자는 포커스된 요소를 시각적으로 표시할지 브라우저가 입력 방식과 요소 종류 등을 고려해 판단할 때 일치합니다. 클릭과 Tab으로 비교하면 두 표시가 동시에 나타나는 경우도 볼 수 있습니다. [MDN :focus-visible](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:focus-visible)
+
+### 002. 왜 내 웹만 구릴까?
+
+모든 단계에 같은 로그인 화면을 사용합니다. 유효한 이메일 형식으로 제출하면 화면 안에서 결과를 보여줍니다. Controls의 `stage`로 같은 크기의 Canvas에서 단계를 전환할 수 있습니다.
+
+| Story            | 바뀐 부분과 관찰할 점                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Before           | 비슷한 크기의 제목과 본문, 제각각인 여백이 어디부터 읽어야 할지에 어떤 영향을 주는지 봅니다.                                   |
+| Typography       | `font-size`, `font-weight`, `line-height`, `letter-spacing`으로 제목, 입력 라벨, 안내 문구에 서로 다른 읽기 우선순위를 줍니다. |
+| Spacing          | 8px 단위의 `gap`, `padding`, `margin`으로 제목과 설명을 가까이 두고 입력 그룹과 구분합니다.                                    |
+| Color            | 종이색 표면과 잉크색 본문을 적용하고 버튼을 보라색으로 강조합니다. 버튼과 보조 문구가 어떻게 다르게 읽히는지 비교합니다.       |
+| Visual Hierarchy | 버튼을 폼 너비에 맞추고 `border-block-end`로 보조 안내를 분리합니다. 입력 후 다음 행동이 어디인지 살펴봅니다.                  |
+| After            | 앞 단계에 `border-radius`, 얕은 그림자와 버튼 호버를 더합니다.                                                                 |
+| Before / After   | 두 화면에서 같은 이메일을 제출해 보면서 정보와 행동은 같은 상태에서 디자인 차이를 비교합니다.                                  |
+
+[로컬 Before / After 캡처](http://localhost:6006/iframe.html?id=002-design-refinement--before-after&viewMode=story)
+
+### 003. z-index: 9999도 안 되는 이유
+
+보라색은 A 또는 A의 자식, 초록색은 B입니다. 점선은 A의 실제 부모 경계이고, 하단의 화살표는 DOM 트리에서 쌓임 맥락을 형성하는 요소만 남긴 경로입니다. 각 장면은 Storybook의 다른 요소와 섞이지 않도록 자체 쌓임 맥락을 만듭니다.
+
+| Story                          | 관찰할 동작과 핵심 CSS                                                                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Basic Z-Index                  | 같은 맥락에 있는 두 `position: absolute` 요소에서 A의 `z-index`를 1에서 3으로 바꾸면 겹친 영역의 순서가 뒤집힙니다. B는 2로 고정됩니다.      |
+| Stacking Context Problem       | A는 1, B는 2입니다. A의 자식에 9999를 줘도 바깥 장면에서 비교하는 단위는 부모 A와 부모 B라서 B가 위에 남습니다.                              |
+| Transform and Stacking Context | A의 `transform: none`을 `translateX(0)`으로 바꿉니다. 위치가 같아도 변환이 적용된 쪽에서는 A가 별도 맥락을 만들고 B가 자식을 덮습니다.       |
+| Opacity and Stacking Context   | A의 `opacity`를 1에서 0.8로 바꾸면 A와 자식이 함께 합성되며 B가 위에 올라옵니다.                                                             |
+| Isolation                      | A에 `isolation: isolate`를 적용하면 위치나 투명도를 바꾸지 않고 쌓임 맥락을 만들 수 있습니다.                                                |
+| Interactive Playground         | 부모 A를 `auto`로 둔 상태에서 transform, opacity, isolation을 하나씩 바꿉니다. 이어 A를 3으로 바꿔 부모 단위의 순서가 달라지는지 확인합니다. |
+
+이 예제에서 A는 위치 지정 요소이므로 정수 `z-index`가 새 맥락을 만듭니다. 일반 흐름에서는 `z-index`가 위치 지정 요소와 flex·grid 아이템에 적용됩니다. `auto`인 A도 transform, opacity 또는 isolation 조건으로 맥락을 형성할 수 있습니다. [MDN Stacking context](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Stacking_context) · [MDN z-index](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/z-index)
+
+[로컬 Interactive Playground 캡처](http://localhost:6006/iframe.html?id=003-stacking-context--interactive-playground&viewMode=story)
 
 ## 에피소드 추가
 
