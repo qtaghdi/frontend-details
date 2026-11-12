@@ -1,0 +1,26 @@
+$paper: #efebe3;
+$ink: #26253a;
+$surface: #fffcf6;
+$accent: #5625d5;
+$edge: #b8b0a3;
+$mono: ui-monospace, "SF Mono", Consolas, monospace;
+
+@mixin stage {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  min-block-size: max(240px, 100dvh);
+  padding: clamp(12px, 3vw, 32px);
+  color: $ink;
+}
+
+@mixin comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 20px);
+  inline-size: min(100%, 920px);
+
+  @media (max-width: 539px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

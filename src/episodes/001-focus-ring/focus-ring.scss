@@ -1,8 +1,11 @@
+@use "../../shared/experiment";
+@use "sass:meta";
+
 .focus-ring {
-  --surface: #efebe3;
-  --ink: #26253a;
-  --key-surface: #fffcf6;
-  --key-edge: #b8b0a3;
+  --surface: #{experiment.$paper};
+  --ink: #{experiment.$ink};
+  --key-surface: #{experiment.$surface};
+  --key-edge: #{experiment.$edge};
   --key-hover: #f5eddf;
   --key-active: #e8ddce;
   --key-disabled-ink: #635b51;
@@ -10,10 +13,10 @@
   --key-size: 56px;
   --key-radius: 14px;
   --key-gap: 16px;
-  --ring-color: #5625d5;
+  --ring-color: #{experiment.$accent};
   --ring-width: 3px;
   --ring-offset: 4px;
-  --mono: ui-monospace, "SF Mono", Consolas, monospace;
+  --mono: #{meta.inspect(experiment.$mono)};
 
   display: grid;
   place-items: center;
